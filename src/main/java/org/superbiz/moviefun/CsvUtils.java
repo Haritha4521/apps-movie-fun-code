@@ -3,9 +3,7 @@ package org.superbiz.moviefun;
 import com.fasterxml.jackson.databind.MappingIterator;
 import com.fasterxml.jackson.databind.ObjectReader;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -14,7 +12,13 @@ public class CsvUtils {
 
     public static String readFile(String path) {
         try {
-            Scanner scanner = new Scanner(new File(path)).useDelimiter("\\A");
+            /*Class cls = Class.forName("CsvUtils");
+            ClassLoader cLoader = cls.getClassLoader();*/
+
+            Scanner scanner = new Scanner(CsvUtils.class.getClassLoader().
+                    getResourceAsStream(path)).useDelimiter("\\A");
+
+            //InputStream is = new InputStream(cLoader.getResourceAsStream(path));
 
             if (scanner.hasNext()) {
                 return scanner.next();
@@ -22,7 +26,7 @@ public class CsvUtils {
                 return "";
             }
 
-        } catch (FileNotFoundException e) {
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
