@@ -12,13 +12,9 @@ public class CsvUtils {
 
     public static String readFile(String path) {
         try {
-            /*Class cls = Class.forName("CsvUtils");
-            ClassLoader cLoader = cls.getClassLoader();*/
 
             Scanner scanner = new Scanner(CsvUtils.class.getClassLoader().
                     getResourceAsStream(path)).useDelimiter("\\A");
-
-            //InputStream is = new InputStream(cLoader.getResourceAsStream(path));
 
             if (scanner.hasNext()) {
                 return scanner.next();
